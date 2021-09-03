@@ -1,6 +1,7 @@
 const axios = require('axios')
-require('dotenv').config()
-const key = process.env.OPEN_WEATHER_API_KEY
+const { config } = require('./config')
+
+const key = config.OPEN_WEATHER_API_KEY
 const api_config = {
     method: 'get',
     url: `https://api.openweathermap.org/data/2.5/weather`,
@@ -24,23 +25,22 @@ async function getWeather() {
         })
         return modified.join(' ')
     }
-    axios(api_config).then(res => {
-        const data = res.data
-        const main = data.main
-        const weather = data?.weather[0] ? data.weather[0] : {}
-        weatherData.current_temp = Math.round(main.temp)
-        weatherData.feels_like = Math.round(main.feels_like)
-        weatherData.min = Math.round(main.temp_min)
-        weatherData.max = Math.round(main.temp_max)
-        weatherData.loc = {
-            lat: data.coord.lat,
-            lon: data.coord.lon,
-            name: data.name
-        }
-        weatherData.description = weather?.description ? formatWeatherDescription(weather.description) : null
-        weatherData.image = weather?.icon ? getImage(weather.icon) : null
-    })
+    const response = await axios(api_config)
+    const data = response.data
+    const main = data.main
+    const weather = data?.weather[0] ? data.weather[0] : {}
+    weatherData.current_temp = Math.round(main.temp)
+    weatherData.feels_like = Math.round(main.feels_like)
+    weatherData.min = Math.round(main.temp_min)
+    weatherData.max = Math.round(main.temp_max)
+    weatherData.loc = {
+        lat: data.coord.lat,
+        lon: data.coord.lon,
+        name: data.name
+    }
+    weatherData.description = weather?.description ? formatWeatherDescription(weather.description) : null
+    weatherData.image = weather?.icon ? getImage(weather.icon) : null
     return weatherData
 }
 
-export default getWeather
+module.exports.getWeather = getWeather

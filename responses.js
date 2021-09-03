@@ -1,20 +1,30 @@
 export default responses = {
-    ping: {
-        "action": "PING",
-        "status": 200,
-        "message": "OK"
+    200: (action, data) => {
+        return {
+            "action": action,
+            "status": 200,
+            "message": "OK",
+            data: data
+        }
     },
-    server_error: {
-        "acction": "ERR",
+    201: (action, data) => {
+        return {
+            "action": action,
+            "status": 201,
+            "message": "CREATED",
+            data: data
+        }
+    },
+    401: (action) => {
+        return {
+            "action": action,
+            "status": 401,
+            "message": "UNAUTHORIZED"
+        }
+    },
+    500: {
+        "acction": "ERROR",
         "status": 500,
         "message": "Internal Server Error"
     },
-    weather200: (data) => {
-        return {
-            "action": "GET weather",
-            "status": 200,
-            "message": "OK",
-            "data": data
-        }
-    }
 }
