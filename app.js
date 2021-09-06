@@ -4,7 +4,7 @@ const { default: responses } = require('./responses')
 const { getWeather } = require('./weather')
 require('dotenv').config()
 const app = express()
-const port = process.env.port || 8080
+const port = process.env.PORT || 8080
 
 app.use(express.json())
 app.get('/ping', (req, res) => {
@@ -24,6 +24,9 @@ app.route('system')
             location: "XXX",
         }
         res(200).json(responses[200]("GET System Info", data))
+    })
+    .post((req, res) => {
+        res.json(201).json(responses[201]("POST System Info", data))
     })
     .put((req, res) => {
         const data = { // sample data
