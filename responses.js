@@ -1,4 +1,4 @@
-export default responses = {
+module.exports.responses = {
     200: (action, data) => {
         return {
             "action": action,
