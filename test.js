@@ -1,4 +1,4 @@
-const { getWeather } = require('./weather')
+const { getWeather } = require('./route_helpers/weather')
 const admin = require('firebase-admin');
 const { config } = require('./config');
 const { firestoreCollection } = require('./objects');
