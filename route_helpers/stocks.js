@@ -1,5 +1,5 @@
 const axios = require('axios')
-const { config } = require('../config')
+const { config } = require('../setup/config')
 
 const api_config = (symbol) => {
     return {
@@ -15,10 +15,10 @@ const api_config = (symbol) => {
 async function getStockQuote(symbol) {
     const res = await axios(api_config(symbol))
     return {
-        current_price = res.c,
-        change = res.dp,
-        high = res.h,
-        low = res.l
+        current_price : res.c,
+        change : res.dp,
+        high : res.h,
+        low : res.l
     }
 }
 

@@ -1,5 +1,5 @@
 const axios = require('axios')
-const { config } = require('../config')
+const { config } = require('../setup/config')
 
 const key = config.OPEN_WEATHER_API_KEY
 const api_config = {

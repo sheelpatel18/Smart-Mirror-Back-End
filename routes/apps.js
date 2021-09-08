@@ -1,12 +1,10 @@
 const express = require('express')
-const { firestore } = require('firebase-admin')
-const { firestoreCollection } = require('./objects')
+const { firestoreCollection } = require('../setup/objects')
 const router = express.Router()
-const admin = require('firebase-admin');
-const { responses } = require('./responses');
-const firestore = admin.firestore()
+const { responses } = require('../setup/responses');
+const { firestore } = require('../server');
 const apps = new firestoreCollection(firestore.collection('Apps'))
-const { getStockQuote } = require('../route_helpers/stocks')
+const { getStockQuote } = require('../route_helpers/stocks');
 
 router.get('/weather', (req, res) => {
     getWeather().then((data, err) => {
@@ -29,12 +27,13 @@ const sampleAppDBData = {
 
 
 router.route('/financials')
-    .get(async (req, res) => {
+    .get((req, res) => {
         var stockData = new Array()
         apps.get(req.query.id).then((data, err) => {
             if (err) throw err
             Object.keys(data.stocks).forEach(symbol => {
-                stockData.push(await getStockQuote(symbol))
+                //const quote = await getStockQuote(symbol)
+                //stockData.push(quote)
             });
             res.status(responses[200]).json("GET Stocks", stockData)
         })
@@ -56,4 +55,4 @@ router.route('/calender')
 
 
 
-moduke.exports = router
+module.exports = router

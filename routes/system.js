@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const admin = require('firebase-admin')
-const firestore = admin.firestore()
+const { firestore } = require('../server');
+const { firestoreCollection } = require('../setup/objects');
 const system = new firestoreCollection(firestore.collection('System'))
 
 router.route('/system')
@@ -35,5 +35,5 @@ router.route('/system')
             res.status(201).json(responses[201]("PATCH System Info", data))
         })
     })
-    
+
 module.exports = router

@@ -1,17 +1,14 @@
+require('dotenv').config()
 const express = require('express')
-const router = express.Router()
 const { responses } = require('./setup/responses')
-const { getWeather } = require('./route_helpers/weather')
 const { config } = require('./setup/config')
-const admin = require('firebase-admin');
-const { firestoreCollection } = require('./setup/objects')
-const appRoute = require('./apps')
-const systemRoute = require('./system')
-const app = express()
-const port = 8080
+const admin = require('firebase-admin')
 admin.initializeApp({ credential: admin.credential.cert(config.GCP_KEY_PATH) });
-const firestore = admin.firestore()
-const system = new firestoreCollection(firestore.collection('System'))
+module.exports.firestore = admin.firestore()
+const app = express()
+const port = process.env.PORT || 8080
+const appRoute = require('./routes/apps')
+const systemRoute = require('./routes/system')
 app.use(express.json())
 
 app.get('/ping', (req, res) => {
