@@ -7,4 +7,3 @@ const firestore = admin.firestore()
 const system = new firestoreCollection(firestore.collection('System'))
 
 getWeather().then(res => console.log(res))
-system.get("pKmZEKEbgIFAHJXJ2eRv").then(res => console.log(res))
