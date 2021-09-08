@@ -35,5 +35,5 @@ router.route('/system')
             res.status(201).json(responses[201]("PATCH System Info", data))
         })
     })
-
+    
 module.exports = router
