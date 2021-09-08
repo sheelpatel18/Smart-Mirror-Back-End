@@ -1,10 +1,10 @@
 const express = require('express')
 const router = express.Router()
-const { responses } = require('./responses')
+const { responses } = require('./setup/responses')
 const { getWeather } = require('./route_helpers/weather')
-const { config } = require('./config')
+const { config } = require('./setup/config')
 const admin = require('firebase-admin');
-const { firestoreCollection } = require('./objects')
+const { firestoreCollection } = require('./setup/objects')
 const appRoute = require('./apps')
 const systemRoute = require('./system')
 const app = express()
@@ -19,6 +19,6 @@ app.get('/ping', (req, res) => {
 })
 
 app.use('/apps', appRoute)
-app.use('system', systemRoute)
+app.use('/system', systemRoute)
 
 app.listen(port)

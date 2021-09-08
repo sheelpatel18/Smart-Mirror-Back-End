@@ -15,9 +15,7 @@ router.get('/weather', (req, res) => {
     })
 })
 
-
-
-const sampleAppData = {
+const sampleAppDBData = {
     stocks: {
         "APPL": "Apple Inc",
         "GOOGL": "Google Inc"
@@ -30,7 +28,7 @@ const sampleAppData = {
 }
 
 
-router.route('/stocks')
+router.route('/financials')
     .get(async (req, res) => {
         var stockData = new Array()
         apps.get(req.query.id).then((data, err) => {
@@ -41,13 +39,6 @@ router.route('/stocks')
             res.status(responses[200]).json("GET Stocks", stockData)
         })
     })
-    .patch((req, res) => {
-        const body = { stocks : {...req.body} }
-        apps.edit(body, req.query.id).then((data, err) => {
-            if (err) throw err
-            res.status(201).json("PATCH Stocks", data)
-        })
-    })
 
 router.route('/sports')
     .get((req, res) => {
@@ -56,13 +47,13 @@ router.route('/sports')
             res.status(responses[200]).json("GET Stocks", data)
         })
     })
-    .patch((req, res) => {
-        const body = { sports : {...req.body} }
-        apps.edit(req.body, req.query.id).then((data, err) => {
-            if (err) throw err
-            res.status(201).json("PATCH Stocks", data)
-        })
+
+router.route('/calender')
+    .get((req, res) => {
+        
     })
+
+
 
 
 moduke.exports = router
