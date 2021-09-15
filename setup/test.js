@@ -1,6 +1,6 @@
 const { getWeather } = require('../route_helpers/weather')
 const admin = require('firebase-admin');
-const { config } = require('./config');
+const { config } = require('../config');
 const { firestoreCollection } = require('./objects');
 admin.initializeApp({ credential: admin.credential.cert(config.GCP_KEY_PATH) });
 const firestore = admin.firestore()

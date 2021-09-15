@@ -24,6 +24,7 @@
     "express": "^4.17.1",
     "firebase-admin": "^9.11.1",
     "http": "^0.0.1-security",
+    "lodash": "^4.17.21",
     "require": "^2.4.20",
     "websocket": "^1.0.34"
   }

@@ -1,7 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const { responses } = require('./setup/responses')
-const { config } = require('./setup/config')
+const config = require('./config')
 const admin = require('firebase-admin')
 admin.initializeApp({ credential: admin.credential.cert(config.GCP_KEY_PATH) });
 module.exports.firestore = admin.firestore()
